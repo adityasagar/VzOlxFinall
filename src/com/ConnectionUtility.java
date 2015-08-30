@@ -8,7 +8,7 @@ public class ConnectionUtility {
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
 
-conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vzolx","root", "root");}
+conn = DriverManager.getConnection("jdbc:mysql://us-cdbr-iron-east-02.cleardb.net/ad_05e7fe6bd1f8e1c?user=b70e4174d40ce1&password=12ddc464");}
 		catch(Exception e){
 			e.printStackTrace();
 		}

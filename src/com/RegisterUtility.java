@@ -46,8 +46,7 @@ public class RegisterUtility {
 	
 		java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		System.out.println("fads--"+query);
-			
-	
+		psmt= con.prepareStatement(query);
 		psmt.setString(1, u.getName());
 		
 		psmt.setString(2, u.getEmail());

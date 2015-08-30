@@ -191,11 +191,11 @@ function home(){
 <table>
 <tr>
 <% for(int i=0;i<recent.size();i++){ %>
-<td><img src='<%=recent.get(i).getImageLink() %>' width="300" height="150" /></td>
+<td><a></a><img src='<%=recent.get(i).getImageLink() %>' width="300" height="150" /></a></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<recent.size();i++){ %>
-<td align="center"><%=recent.get(i).getName() %></a></td>
+<td align="center"><a><%=recent.get(i).getName() %></a></td>
 <%} %>
 </tr>
 </table>
@@ -207,11 +207,11 @@ function home(){
 <table>
 <tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></td>
+<td><a></a><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></a></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td align="center"><%=mostView.get(i).getName() %></a></td>
+<td align="center"><a><%=mostView.get(i).getName() %></a></td>
 <%} %>
 </tr>
 </table>

@@ -42,29 +42,21 @@ public class RegisterUtility {
 	PreparedStatement psmt= null;
 	try{
 		con = ConnectionUtility.getConnection();
-		//String query= "insert into users(username, email, phone,pwd,joindate) values(?,?,?,?,?)";
-		String query1= "delete from users";
-		String query2= "delete from products";
+		String query= "insert into users(username, email, phone,pwd,joindate) values(?,?,?,?,?)";
 	
+		java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		System.out.println("fads--"+query);
+			
 	
-			java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-		//System.out.println("fads--"+query);
-			PreparedStatement psmt1= con.prepareStatement(query1);
-			PreparedStatement psmt2= con.prepareStatement(query2);
-	
-		/*psmt.setString(1, u.getName());
+		psmt.setString(1, u.getName());
 		
 		psmt.setString(2, u.getEmail());
 		psmt.setString(3, u.getContact());
 		psmt.setString(4, u.getPwd());
 		psmt.setDate(5, sqlDate);
-		//psmt.setLong(6, u.getUserId());*/
-		rows=psmt1.executeUpdate();
+		//psmt.setLong(6, u.getUserId());
+		rows=psmt.executeUpdate();
 		System.out.println(rows);
-		rows=psmt2.executeUpdate();
-		System.out.println(rows);
-		psmt1.close();
-		psmt2.close();
 	}
 	catch(Exception e){
 		e.printStackTrace();

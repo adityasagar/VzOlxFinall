@@ -59,6 +59,7 @@
 #cssmenu.align-right ul ul {
   text-align: right;
 }
+
 #cssmenu > ul > li > a {
   padding: 4px;
   font-size: 12px;

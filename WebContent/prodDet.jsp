@@ -166,14 +166,18 @@ function home(){
 </div>
 <div>
 <% for(int i=0; i<results.size(); i++){%>
-	<div id="detDiv">
-	<div class="prod" id=<%=i%>>
-	<table width="90%" align="center"><tr><td rowspan="2" width="15%" align="center"></td><td class="det" rowspan="2" align="center" width="50%"><%=results.get(i).getName() %></td><td rowspan="2" class="det" width="30%" align="center"><%=results.get(i).getCategory() %></td></tr></table>
+	<table><tr><td width="20%" align="right"><img width="200" height="100" src='<%=results.get(i).getImageLink()%>'></td><td width="70%"><div class="detDiv" id="detDiv"+'<%=i%>'>
+	<div class="prod" id='<%=i%>'>
+	<table width="100%" align="center"><tr><td rowspan="2" width="15%" align="center"><img src=""></td><td class="det" rowspan="2" align="center" width="50%"><%=results.get(i).getName() %></td><td rowspan="2" class="det" width="30%" align="center"><%=results.get(i).getCategory() %></td></tr></table>
 	</div>
-	<div class="addDet" id="addDet"+<%=i%>></div>
-	<table width="90%" align="center"><tr><td rowspan="2" width="15%"align="center"></td><td class="det" rowspan="2" align="center" width="50%"><%=results.get(i).getDescription() %></td><td class="det" width="30%" align="center">For <%= results.get(i).getReason() %> @ Rs.<%=results.get(i).getPrice() %></td></tr>
-	<tr><td width="30%" align="center"><input type="button" value="Contact Seller" onClick="javascript:contactSeller('<%= results.get(i).getProductId() %>');"/></td></tr></table>
-	</div><br>
+	<div class="addDet" id="addDet"+'<%=i%>'>
+	<table width="100%" align="center"><tr><td rowspan="2" width="15%" align="center"></td><td class="det" rowspan="2" align="center" width="50%"><%=results.get(i).getDescription() %></td><td class="det" width="30%" align="center">For <%= results.get(i).getReason() %> @ Rs.<%=results.get(i).getPrice() %></td></tr>
+	<tr><td width="30%" align="center"><input class="button" type="button" value="Contact Seller" onClick="javascript:contactSeller('<%= results.get(i).getProductId() %>');"/></td></tr></table>
+	
+	</div>
+	</div>
+	</td></tr></table>
+	<br>
 
 <%} %>
 </div>

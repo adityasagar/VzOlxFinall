@@ -9,7 +9,7 @@ List<ProductVO> mostView = request.getAttribute("mostViewList")==null?new ArrayL
 List<ProductVO> recent = request.getAttribute("recentList")==null?new ArrayList<ProductVO>():(List<ProductVO>)request.getAttribute("recentList");
 UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getAttribute("user");
 System.out.println("userId"+userId+" name"+name);
-
+String message = request.getAttribute("message")==null?"":String.valueOf(request.getAttribute("message"));
 %>
 <!DOCTYPE html>
 <html>
@@ -18,18 +18,14 @@ System.out.println("userId"+userId+" name"+name);
 <title>Verizon Classified Portal</title>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="js/styles.css">
+<link rel="stylesheet" href="js/vzOlx.css">
 <script src="js/script.js"></script>
+<script src="js/vzOlx.js"></script>
 <style type="text/css">
+
 .login{
 	background-color: #e0e0e0;
 	border-radius: 25px;
-}
-.title{
-	background-color: red;
-	color:#FFFFFF;
-}
-a.link{
-	color:#FFFFFF;
 }
 .head{
 	font-size:50px;
@@ -43,8 +39,13 @@ a.link{
 #det{
 	display:none;
 }
+
 </style>
 <script>
+<% if(message!=null && message.trim().length()>0){ %>
+	var message = '<%=message%>';
+	alert(message);
+<% }%>
 var userId = '<%=userId %>';
 var name = '<%=name %>';
 //alert("userId"+userId+", name"+name);
@@ -84,34 +85,18 @@ $(document).ready(function(){
 	});
 });
 
-function addProducts(){
-	/*document.getElementById("det").style.display="none";
-	document.getElementById("login").style.display="none";
-	document.getElementById("addProd").style.display="block";*/
-	//alert(userId);
-	document.getElementById("type").value="addProj";
-	var form = document.getElementById("form");
-	form.action="ProductServlet";
-	form.submit();
-}
-
-function prodDetails(type,value){
-	//alert("type-"+type+", value-"+value);
-	document.getElementById("type").value=type;
-	document.getElementById("value").value=value;
-	var form = document.getElementById("form");
-	form.action="ProductServlet";
-	form.submit();
-	
-}
 function clearForm(){
 	$('form').trigger('reset');
 }
 function signUp(){
 	window.location.replace("addUser.html");
 }
-function login(){
-	window.location.replace("index.jsp");
+function home(){
+	document.getElementById("email").value='<%= user.getEmail()%>';
+	document.getElementById("pwd").value='<%= user.getPwd()%>';
+	var form = document.getElementById("form");
+	form.action="RegisterServlet";
+	form.submit();
 }
 </script>
 </head>
@@ -130,8 +115,8 @@ function login(){
 <input type="hidden" name="name" id="name"/>
 <table align="center" width="60%">
 <tr><td align="center">
-<input type="text" name="email" placeholder="Enter your Email ID"></td></tr>
-<tr><td align="center"><input type="password" name="pwd" placeholder="Enter your Password"></td></tr>
+<input type="text" id="email" name="email" placeholder="Enter your Email ID"></td></tr>
+<tr><td align="center"><input type="password" id="pwd" name="pwd" placeholder="Enter your Password"></td></tr>
 
 <tr><td align="right"><input type="submit" value="Login">
 <input type="button" value="Clear" onClick="javascript:clearForm();"></td></tr>
@@ -142,8 +127,12 @@ function login(){
 <div class="det" id="det">
 <div id="detHdr">
 <table width="100%">
-<tr><td width="50%"><input width="150" id="searchCrit" placeholder="Enter Product to Search" type="text"/><img width="25" height="25" src="img/search.png" onClick="javascript:prodDetails('search',$('#searchCrit').val());"></td><td align="right"><a href="javascript:addProducts();">Add New Products</a></td><td align="right"><%=name.toUpperCase() %><br>
-
+<tr>
+<td align="left"><a class="mainLink" href="javascript:home();">Home</a>&nbsp;&nbsp;<a class="mainLink" href="javascript:addProducts();">Add New Products</a></td><td align="right"><span class="uName"><%=name.toUpperCase() %></span></td></tr>
+<tr>
+<td width="50%">
+<input id="searchCrit" placeholder="Enter Product to Search" type="text"/><img width="25" height="25" src="img/search.png" onClick="javascript:prodDetails('search',$('#searchCrit').val());"></td>
+<td align="right">
 <div id='cssmenu'>
 <ul>
    <li ><a href='#'>View Profile</a>
@@ -161,6 +150,7 @@ function login(){
    </li>
 </ul>
 </div>
+</td></tr>
 </table>
 <hr>
 </div>
@@ -201,7 +191,7 @@ function login(){
 <table>
 <tr>
 <% for(int i=0;i<recent.size();i++){ %>
-<td><img src="img/blank2.jpg" width="300" height="150" /></td>
+<td><img src='<%=recent.get(i).getImageLink() %>' width="300" height="150" /></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<recent.size();i++){ %>
@@ -217,7 +207,7 @@ function login(){
 <table>
 <tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td><img src="img/blank2.jpg" width="300" height="150" /></td>
+<td><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<mostView.size();i++){ %>

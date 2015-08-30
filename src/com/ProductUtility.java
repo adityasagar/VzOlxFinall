@@ -48,6 +48,13 @@ catch(Exception e){
 		return p;
 	}
 	public static void sendEmail(ProductVO product,UserVO buyer,UserVO seller,String msg){
+		try {
+			new EmailSend().sendMail(seller.getEmail(), buyer.getEmail());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*
 		String to=seller.getEmail();
 		String from=buyer.getEmail();
 		String host="smtp.verizon.com";
@@ -66,7 +73,7 @@ catch(Exception e){
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	public static boolean productEntry(ProductVO p){
 		int rows=0;
@@ -74,7 +81,7 @@ catch(Exception e){
 		try{
 			java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			Connection con = ConnectionUtility.getConnection();
-			String query= "insert into products(productname, category,hits, price,ownerid,description, reason, buydate ) values(?,?,?,?,?,?,?,?)";
+			String query= "insert into products(productname, category,hits, price,ownerid,description, reason, buydate, imagelink ) values(?,?,?,?,?,?,?,?,?)";
 			PreparedStatement psmt= con.prepareStatement(query);
 			psmt.setString(1,p.getName() );
 			psmt.setString(2, p.getCategory());
@@ -85,6 +92,8 @@ catch(Exception e){
 			psmt.setString(6,p.getDescription() );
 			psmt.setString(7,p.getReason() );
 			psmt.setDate(8,sqlDate );
+			psmt.setString(9,getCategoryImage(p.getCategory()) );
+
 			//psmt.setDate(10,p.getSellDate() );
 			//psmt.setString(11,p.getImageLink() );
 			rows =psmt.executeUpdate();
@@ -97,7 +106,33 @@ catch(Exception e){
 			return check;
 		}
 	
-		
+	public static String getCategoryImage( String category){
+		String imageLink= "";
+		if (category.equalsIgnoreCase("Electronics")){
+			imageLink ="img/Electronics.png";
+		}else if(category.equalsIgnoreCase("Vehicles")){
+			imageLink ="img/vehicles.jpg";
+		}else if(category.equalsIgnoreCase("Home & Furniture")){
+			imageLink ="img/furnishing.jpg";
+		}else if(category.equalsIgnoreCase("Animals")){
+			imageLink ="img/animals.jpg";
+		}else if(category.equalsIgnoreCase("Books,Sports & Hobbies")){
+			imageLink ="img/sports.jpg";
+		}else if(category.equalsIgnoreCase("Fashion & Beauty")){
+			imageLink ="img/fashion.jpg";
+		}else if(category.equalsIgnoreCase("Kids & Baby Products")){
+			imageLink ="img/kids.jpg";
+		}else if(category.equalsIgnoreCase("Services")){
+			imageLink ="img/service.png";
+		}else if(category.equalsIgnoreCase("Real Estate")){
+			imageLink ="img/realEstate.gif";
+		}else if(category.equalsIgnoreCase("Others")){
+			imageLink ="img/other.png";
+		}else{
+			imageLink ="img/blank2.jpg";
+		}
+		return imageLink;
+	}
 	public static ArrayList<ProductVO> getCategoryResults( String value){
 		ArrayList<ProductVO> results= new ArrayList<ProductVO>();
 		ProductVO p = new ProductVO();

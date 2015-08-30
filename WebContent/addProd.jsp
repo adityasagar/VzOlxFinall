@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.UserVO" %>
+    
 <% String userId= request.getAttribute("userid")==null?"":(String)request.getAttribute("userid");
 String name= request.getAttribute("name")==null?"":(String)request.getAttribute("name");
 Boolean inserted= request.getAttribute("inserted")==null?false:(Boolean)request.getAttribute("inserted");
+UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getAttribute("user");
 %>
  <!DOCTYPE html>
 <html>
@@ -10,6 +13,10 @@ Boolean inserted= request.getAttribute("inserted")==null?false:(Boolean)request.
 <meta charset="ISO-8859-1">
 <title>Add product</title>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="js/styles.css">
+<link rel="stylesheet" href="js/vzOlx.css">
+<script src="js/script.js"></script>
+<script src="js/vzOlx.js"></script>
 <style type="text/css">
 .login{
 	background-color: #e0e0e0;
@@ -27,6 +34,9 @@ Boolean inserted= request.getAttribute("inserted")==null?false:(Boolean)request.
 <script>
 var userId = '<%=userId %>';
 var name = '<%=name %>';
+document.getElementById("userid").value=userId;
+document.getElementById("name").value=name;
+
 $(document).ready(function(){
 	$("#userid").val(userId);
 	$("#name").val(name);
@@ -35,7 +45,14 @@ $(document).ready(function(){
 	<%}%>
 });
 function clearForm(){
-	$('form').trigger('reset');
+	$('#form1').trigger('reset');
+}
+function home(){
+	document.getElementById("email").value='<%= user.getEmail()%>';
+	document.getElementById("pwd").value='<%= user.getPwd()%>';
+	var form = document.getElementById("form");
+	form.action="RegisterServlet";
+	form.submit();
 }
 </script>
 </head>
@@ -44,9 +61,47 @@ function clearForm(){
 <table width="100%"><tr><th align="left"><img src="img/VerizonLogo.png"/></th><th width="50%" align="left"><label class="head">Vz Classified</label></th><th width="30%" align="right"><%=name.toUpperCase() %><br><a href="javascript:viewUser();">View Profile</a></th></tr></table>
 <hr>
 </div>
+<div id="detHdr">
+<table width="100%">
+<tr>
+<td align="left"><a class="mainLink" href="javascript:home();">Home</a>&nbsp;&nbsp;<a class="mainLink" href="javascript:addProducts();">Add New Products</a></td><td align="right"><span class="uName"><%=name.toUpperCase() %></span></td></tr>
+<tr>
+<td width="50%">
+<input id="searchCrit" placeholder="Enter Product to Search" type="text"/><img width="25" height="25" src="img/search.png" onClick="javascript:prodDetails('search',$('#searchCrit').val());"></td>
+<td align="right">
+<div id='cssmenu'>
+<ul>
+   <li ><a href='#'>View Profile</a>
+      <ul>
+         <li><a href='#'><%=user.getName() %></a>
+         </li>
+         <li><a href='#'><%= user.getContact()%></a>
+         </li>
+         <li><a href='#'><%= user.getEmail()%></a>
+         </li>
+         <li><a href='javascript:login();'>SignOut </a>
+         </li>
+         
+      </ul>
+   </li>
+</ul>
+</div>
+</td></tr>
+</table>
+<hr>
+</div>
+<form id="form" action="RegisterServlet" method="post">
+<input type="hidden" name="flag" value="login"/>
+<input type="hidden" name="type" id="type"/>
+<input type="hidden" name="value" id="value"/>
+<input type="hidden" name="userid" id="userid"/>
+<input type="hidden" name="name" id="name"/>
+<input type="hidden" name="email" id="email"/>
+<input type="hidden" name="pwd" id="pwd"/>
+</form>
 <span><h2 class="title">Just a brief Details for others to know about your Product...</h2></span>
 <div class="login" id="login">
-<form name='form' action="ProductServlet" method="post">
+<form name='form1' id='form1' action="ProductServlet" method="post">
 <input type="hidden" name="type" value="newProd"/>
 <input type="hidden" name="userid" id="userid"/>
 <input type="hidden" name="name" id="name"/>

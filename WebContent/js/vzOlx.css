@@ -1,0 +1,27 @@
+#searchCrit{
+	width: 300px;
+	border-radius:3px;
+	border: 1px solid #CCC;
+	padding: 8px;
+	box-shadow: 1px 1px 5px #CCC;
+}
+.title{
+	background: linear-gradient(#800000, #F00000 ); 
+	color:#FFFFFF;
+}
+a.link{
+	color:#FFFFFF;
+}
+a.mainLink{
+	color:#FFFFFF;
+	font-family: 'Open Sans', sans-serif;
+}
+#detHdr{ 
+ 	background: linear-gradient(#800000, #F00000 );  
+ 	color:white; 
+} 
+span.uName{
+	color:#FFFFFF;
+	font-family: Georgia, serif;
+	font-weight: bold;
+}

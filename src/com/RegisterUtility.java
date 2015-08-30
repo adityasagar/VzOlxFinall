@@ -60,9 +60,7 @@ public class RegisterUtility {
 	}
 	public static UserVO verify(String  email, String pwd){
 		//boolean check= false;
-		String userid=null;
 		UserVO u=new UserVO();
-		HashMap<String, String> results= new HashMap<String, String>();
 		try{
 			Connection con = ConnectionUtility.getConnection();
 			String query= "select pwd,userId,username from users where email= ?";
@@ -71,10 +69,12 @@ public class RegisterUtility {
 			psmt.setString(1,email);
 			ResultSet rs= psmt.executeQuery();
 			if(rs.next()){
-			if(pwd.equals(rs.getString(1)))
+			if(pwd.equals(rs.getString("pwd")))
 					{
-				u.setUserId(rs.getLong(2));
-				u.setName(email);
+				u.setUserId(rs.getLong("userId"));
+				u.setName(rs.getString("username"));
+				u.setEmail(email);
+				u.setPwd(pwd);
 				//results.put(rs.getString(3));
 				//System.out.println(rs.getString(3));
 				//results.put("name",rs.getString(3));
@@ -102,6 +102,7 @@ catch(Exception e){
 				u.setEmail(rs.getString("email"));
 				u.setContact(rs.getString("phone"));
 				u.setUserId(rs.getLong("userid"));
+				u.setPwd(rs.getString("pwd"));
 				//u.set
 			}
 			

@@ -1,0 +1,6 @@
+applications :
+- name : vzOlx
+memory: 512M
+instance: 1
+path: dist/MyProj.war
+buildpack: https://github.com/cloudfoundry/java-buildpack

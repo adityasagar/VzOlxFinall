@@ -37,17 +37,18 @@ public class ProductServlet extends HttpServlet {
 
 		String type=request.getParameter("type")==null?"":(String)request.getParameter("type");
 		String value = request.getParameter("value")==null?"":(String)request.getParameter("value");
-		String userId=request.getParameter("userid")==null?"":(String)request.getParameter("userid");
+		String userId=request.getParameter("userid")==null?"0":(String)request.getParameter("userid");
 		String name = request.getParameter("name")==null?"":(String)request.getParameter("name");
 		request.setAttribute("name",(String)(request.getParameter("name").trim()));
 		request.setAttribute("userid",(String)(request.getParameter("userid").trim()));
-		
+		UserVO fullUser= RegisterUtility.getUser(Long.valueOf(userId));
+		request.setAttribute("user", fullUser);
 		if(type.trim().equalsIgnoreCase("category")){
 		ArrayList<ProductVO> results= ProductUtility.getCategoryResults( value);
-		request.setAttribute("type", type);
-		request.setAttribute("value", value);
-		request.setAttribute("results",results);
-		request.getRequestDispatcher("prodDet.jsp").include(request, response);
+			request.setAttribute("type", type);
+			request.setAttribute("value", value);
+			request.setAttribute("results",results);
+			request.getRequestDispatcher("prodDet.jsp").include(request, response);
 		}
 		if(type.trim().equalsIgnoreCase("search")){
 			ArrayList<ProductVO> results= ProductUtility.getSearchResults( value);

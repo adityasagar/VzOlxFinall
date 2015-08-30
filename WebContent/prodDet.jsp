@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.ProductVO"%>
+<%@ page import="com.UserVO" %>
 
 <%
 String userId= request.getAttribute("userid")==null?"":(String)request.getAttribute("userid");
@@ -9,6 +10,7 @@ String name= request.getAttribute("name")==null?"":(String)request.getAttribute(
 String type= request.getAttribute("type")==null?"":(String)request.getAttribute("type");
 String value= request.getAttribute("value")==null?"":(String)request.getAttribute("value");
 List<ProductVO> results = request.getAttribute("results")==null?new ArrayList<ProductVO>():(List<ProductVO>)request.getAttribute("results");
+UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getAttribute("user");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,9 @@ List<ProductVO> results = request.getAttribute("results")==null?new ArrayList<Pr
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <title>Vz Employee Products</title>
 <link rel="stylesheet" href="js/styles.css">
+<link rel="stylesheet" href="js/vzOlx.css">
 <script src="js/script.js"></script>
+<script src="js/vzOlx.js"></script>
 <style type="text/css">
 .title{
 	background-color: red;
@@ -29,22 +33,28 @@ List<ProductVO> results = request.getAttribute("results")==null?new ArrayList<Pr
 }
 #detDiv{
 	width:100%;
-	background-color: #e0e0e0;
-	border-radius: 25px;
 }
-.addDet{
-	display:none;
+
+td.det{
+	background-color:#DCDCDC;
 }
 </style>
 <script>
 var userId = '<%=userId%>';
 var name = '<%=name%>';
-$('.prod').on("click",function(){
-	var id=(this).attr("id");
-	id="#addDet"+id;
+document.getElementById("userid").value=userId;
+document.getElementById("name").value=name;
+/*$(document).ready(function(){
 	$('.addDet').hide();
-	$(id).show();
-});
+	$('.prod').on("click",function(){
+		alert("Click");
+		var id=(this).attr("id");
+		id="#addDet"+id;
+		$('.addDet').hide();
+		$(id).show();
+	});
+});*/
+
 function viewUser(){
 	$('.profile').menu({
 		items:".menu"
@@ -70,7 +80,7 @@ $.get('ProductServlet',{productId: productId, userId: userId, flag:"email"},func
 });
 }
 function contactSeller(productId){
-	var message = prompt("Please enter your Customized Message (if any)", "Your Message");
+	var message = prompt("Please enter your Customized Message (if any)", "Hello, I'm intersted to buy/rent your Product.");
 	message = message.replace(/&/g,"and");
 	message = message.replace(/'/g," ");
 	var dataString = "productid=" + productId+"&name=" + name+"&userid=" + userId+"&message="+message+"&flag=email";
@@ -91,6 +101,13 @@ function contactSeller(productId){
 	    }
 	});
 }
+function home(){
+	document.getElementById("email").value='<%= user.getEmail()%>';
+	document.getElementById("pwd").value='<%= user.getPwd()%>';
+	var form = document.getElementById("form");
+	form.action="RegisterServlet";
+	form.submit();
+}
 </script>
 </head>
 <body>
@@ -100,16 +117,25 @@ function contactSeller(productId){
 </div>
 <div id="detHdr">
 <table width="100%">
-<tr><td width="50%"><input width="150" id="searchCrit" placeholder="Enter Product to Search" type="text"/><img width="25" height="25" src="img/search.png" onClick="javascript:prodDetails('search',$('#searchCrit').val());"></td><td align="right"><a href="javascript:addProducts();">Add New Products</a></td><td align="right"><%=name.toUpperCase() %><br>
-<!--  <ul class="profile" onClick="javascript:viewUser();"><li>View Profile</li></ul>-->
+<tr>
+<td align="left"><a class="mainLink" href="javascript:home();">Home</a>&nbsp;&nbsp;<a class="mainLink" href="javascript:addProducts();">Add New Products</a></td><td align="right"><span class="uName"><%=name.toUpperCase() %></span></td></tr>
+<tr>
+<td width="50%">
+<input id="searchCrit" placeholder="Enter Product to Search" type="text"/><img width="25" height="25" src="img/search.png" onClick="javascript:prodDetails('search',$('#searchCrit').val());"></td>
+<td align="right">
 <div id='cssmenu'>
 <ul>
    <li ><a href='#'>View Profile</a>
       <ul>
-         <li><a href='#'><%=name %></a>
+         <li><a href='#'><%=user.getName() %></a>
          </li>
-         <li><a href='#'>Contact</a>
+         <li><a href='#'><%= user.getContact()%></a>
          </li>
+         <li><a href='#'><%= user.getEmail()%></a>
+         </li>
+         <li><a href='javascript:login();'>SignOut </a>
+         </li>
+         
       </ul>
    </li>
 </ul>
@@ -118,6 +144,15 @@ function contactSeller(productId){
 </table>
 <hr>
 </div>
+<form id="form" action="RegisterServlet" method="post">
+<input type="hidden" name="flag" value="login"/>
+<input type="hidden" name="type" id="type"/>
+<input type="hidden" name="value" id="value"/>
+<input type="hidden" name="userid" id="userid"/>
+<input type="hidden" name="name" id="name"/>
+<input type="hidden" name="email" id="email"/>
+<input type="hidden" name="pwd" id="pwd"/>
+</form>
 <div id="head">
 <%if(type.equalsIgnoreCase("mostviewed")){ %>
 <span><h2 class="title"> Most Popular Products</h2></span>
@@ -131,17 +166,16 @@ function contactSeller(productId){
 </div>
 <div>
 <% for(int i=0; i<results.size(); i++){%>
-<div id="detDiv">
-<div class="prod" id=<%=i%>>
-<table width="90%" align="center"><tr><td rowspan="2" width="15%" align="center"></td><td rowspan="2" align="center" width="50%"><%=results.get(i).getName() %></td><td width="30%" align="center"><%=results.get(i).getCategory() %></td></tr>
-<tr><td><%= results.get(i).getReason() %></td></tr></table>
-</div>
-<div class="addDet" id="addDet"+<%=i%>></div>
-<table width="90%" align="center"><tr><td rowspan="2" width="15%"align="center"></td><td rowspan="2" align="center" width="50%"><%=results.get(i).getDescription() %></td><td width="30%" align="center"><%=results.get(i).getPrice() %></td></tr>
-<tr><td><input type="button" value="Contact Seller" onClick="javascript:contactSeller('<%= results.get(i).getProductId() %>');"/></td></tr></table>
-</div><br>
+	<div id="detDiv">
+	<div class="prod" id=<%=i%>>
+	<table width="90%" align="center"><tr><td rowspan="2" width="15%" align="center"></td><td class="det" rowspan="2" align="center" width="50%"><%=results.get(i).getName() %></td><td rowspan="2" class="det" width="30%" align="center"><%=results.get(i).getCategory() %></td></tr></table>
+	</div>
+	<div class="addDet" id="addDet"+<%=i%>></div>
+	<table width="90%" align="center"><tr><td rowspan="2" width="15%"align="center"></td><td class="det" rowspan="2" align="center" width="50%"><%=results.get(i).getDescription() %></td><td class="det" width="30%" align="center">For <%= results.get(i).getReason() %> @ Rs.<%=results.get(i).getPrice() %></td></tr>
+	<tr><td width="30%" align="center"><input type="button" value="Contact Seller" onClick="javascript:contactSeller('<%= results.get(i).getProductId() %>');"/></td></tr></table>
+	</div><br>
+
 <%} %>
 </div>
-<div class="menu">This is a menu item</div>
 </body>
 </html>

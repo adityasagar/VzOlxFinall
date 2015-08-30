@@ -50,6 +50,7 @@ public class RegisterServlet extends HttpServlet {
 			ArrayList<ProductVO> recentList= ProductUtility.getRecentResults("10");
 			request.setAttribute("mostViewList", mostViewList);
 			request.setAttribute("recentList", recentList);*/
+			request.setAttribute("message", "WELCOME! Please login to continue!");
 			request.getRequestDispatcher("index.jsp").include(request, response);
 		//request.getRequestDispatcher("Succes.html").include(request, response);
 		}else{ 
@@ -59,24 +60,25 @@ public class RegisterServlet extends HttpServlet {
 		else if(flag.trim().equalsIgnoreCase("login")){
 			String email=(String)request.getParameter("email");
 			String pwd=(String)request.getParameter("pwd");
-		UserVO  user=	RegisterUtility.verify(email, pwd);
-		if(user!=null){
-			//boolean loginFlag= true;
-			String userName=user.getName();
-			Long userid=user.getUserId();
-			UserVO fullUser= RegisterUtility.getUser(userid);
-			request.setAttribute("name", userName);
-			request.setAttribute("userid", userid);
-			request.setAttribute("user", fullUser);
-			ArrayList<ProductVO> mostViewList= ProductUtility.getMostViewedResults("10");
-			ArrayList<ProductVO> recentList= ProductUtility.getRecentResults("10");
-			request.setAttribute("mostViewList", mostViewList);
-			request.setAttribute("recentList", recentList);
-			request.getRequestDispatcher("index.jsp").include(request, response);
-		}
+			UserVO  user=	RegisterUtility.verify(email, pwd);
+			if(user!=null && user.getUserId()>0){
+				//boolean loginFlag= true;
+				String userName=user.getName();
+				Long userid=user.getUserId();
+				UserVO fullUser= RegisterUtility.getUser(userid);
+				request.setAttribute("name", userName);
+				request.setAttribute("userid", userid);
+				request.setAttribute("user", fullUser);
+				ArrayList<ProductVO> mostViewList= ProductUtility.getMostViewedResults("10");
+				ArrayList<ProductVO> recentList= ProductUtility.getRecentResults("10");
+				request.setAttribute("mostViewList", mostViewList);
+				request.setAttribute("recentList", recentList);
+				request.getRequestDispatcher("index.jsp").include(request, response);
+			}
 			else {
-				request.getRequestDispatcher("Error.html").include(request, response);
-		}
+				request.setAttribute("message", "ERROR! Please verify your login credentials!");
+				request.getRequestDispatcher("index.jsp").include(request, response);
+			}
 		}
 			//newUser.setUserId(userId);
 		//String name=;

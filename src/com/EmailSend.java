@@ -23,9 +23,9 @@ import javax.mail.internet.*;
            MimeMessage message = new MimeMessage(mailSession);
            Multipart multipart = new MimeMultipart("alternative");
            BodyPart part1 = new MimeBodyPart();
-           part1.setText(msg);
-          BodyPart part2 = new MimeBodyPart();
-           part2.setContent(
+           //part1.setText(msg);
+          //BodyPart part2 = new MimeBodyPart();
+          part1.setContent(
             "<p>Hello Mr./Ms./Mrs."+seller.getName()+",</p><p><b>Mr./Ms./Mrs."+buyer.getName()+"</b> is interested in your product <b>"+product.getName()+"</b>.</p><p>Contact Details: <br>"+buyer.getContact()+"<br>"+buyer.getEmail()+"</p><p><b>Message: </b>"+msg+"</p><p>Thank you,<br>Verizon Employee Classifieds</br></p>",
               "text/html");
            multipart.addBodyPart(part1);

@@ -1,8 +1,9 @@
 package com;
 	 import java.util.Properties;
-     import javax.activation.*;
-     import javax.mail.*;
-     import javax.mail.internet.*;
+
+import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 
      public class EmailSend {
         private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
@@ -10,7 +11,7 @@ package com;
         private static final String SMTP_AUTH_PWD = "txxH436VA4kK5272";
 
 
-        public void sendMail(String from, String to) throws Exception
+        public void sendMail(ProductVO product,UserVO buyer,UserVO seller,String msg) throws Exception
         {
            Properties properties = new Properties();
            properties.put("mail.transport.protocol", "smtp");
@@ -22,17 +23,17 @@ package com;
            MimeMessage message = new MimeMessage(mailSession);
            Multipart multipart = new MimeMultipart("alternative");
            BodyPart part1 = new MimeBodyPart();
-           part1.setText("Hello, Your Contoso order has shipped. Thank you, John");
-           BodyPart part2 = new MimeBodyPart();
+           part1.setText(msg);
+          BodyPart part2 = new MimeBodyPart();
            part2.setContent(
-               "<p>Hello,</p><p>Your Contoso order has <b>shipped</b>.</p><p>Thank you,<br>John</br></p>",
-               "text/html");
+            "<p>Hello Mr./Ms./Mrs."+seller.getName()+",</p><p><b>Mr./Ms./Mrs."+buyer.getName()+"</b> is interested in your product <b>"+product.getName()+"</b>.</p><p>Contact Details: <br>"+buyer.getContact()+"<br>"+buyer.getEmail()+"</p><p><b>Message: </b>"+msg+"</p><p>Thank you,<br>Verizon Employee Classifieds</br></p>",
+              "text/html");
            multipart.addBodyPart(part1);
-           multipart.addBodyPart(part2);
-           message.setFrom(new InternetAddress("Test"));
+          // multipart.addBodyPart(part2);
+           message.setFrom(new InternetAddress("Verizon_Employee_Classifieds"));
            message.addRecipient(Message.RecipientType.TO,
               new InternetAddress("gauravvicky008@gmail.com"));
-           message.setSubject("Your recent order");
+           message.setSubject("Someone is Interested in Your Product");
            message.setContent(multipart);
            Transport transport = mailSession.getTransport();
         // Connect the transport object.

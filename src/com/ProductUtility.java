@@ -60,7 +60,7 @@ catch(Exception e){
 	}
 	public static void sendEmail(ProductVO product,UserVO buyer,UserVO seller,String msg){
 		try {
-			new EmailSend().sendMail(seller.getEmail(), buyer.getEmail());
+			new EmailSend().sendMail( product, buyer, seller, msg);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

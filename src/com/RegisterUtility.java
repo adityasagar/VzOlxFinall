@@ -8,14 +8,17 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class RegisterUtility {
-	public static UserVO getUserByEmail (String email){
+	public static UserVO getUserByEmail (String email) throws Exception{
 		UserVO u= new UserVO();
+		Connection con=null;
+		PreparedStatement psmt=null;
+		ResultSet rs=null;
 		try{
-			Connection con=ConnectionUtility.getConnection();
+			con=ConnectionUtility.getConnection();
 		String query="select * from users where email=?";
-		PreparedStatement psmt= con.prepareStatement(query);
+			psmt= con.prepareStatement(query);
 		psmt.setString(1,u.getEmail());
-	ResultSet rs= psmt.executeQuery();
+			rs= psmt.executeQuery();
 	if(rs!=null && rs.next()){
 		u.setName(rs.getString("username"));
 		u.setEmail(rs.getString("email"));
@@ -25,20 +28,26 @@ public class RegisterUtility {
 		}
 		catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			rs.close();
+			psmt.close();
+			con.close();
 		}
 		return u;
 	}
 	
-	public static boolean signUp (UserVO u){
+	public static boolean signUp (UserVO u) throws Exception{
 	int rows=0;
+	Connection con =null;
+	PreparedStatement psmt= null;
 	try{	
-		Connection con = ConnectionUtility.getConnection();
+		con = ConnectionUtility.getConnection();
 		String query= "insert into users(username, email, phone,pwd,joindate) values(?,?,?,?,?)";
 	
 	
 			java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		System.out.println("fads--"+query);
-			PreparedStatement psmt= con.prepareStatement(query);
+		psmt= con.prepareStatement(query);
 		psmt.setString(1, u.getName());
 		
 		psmt.setString(2, u.getEmail());
@@ -51,6 +60,9 @@ public class RegisterUtility {
 	}
 	catch(Exception e){
 		e.printStackTrace();
+		}finally{
+			psmt.close();
+			con.close();
 	}
 	
 	if(rows>0)
@@ -58,16 +70,19 @@ public class RegisterUtility {
 	else 
 		return false;	
 	}
-	public static UserVO verify(String  email, String pwd){
+	public static UserVO verify(String  email, String pwd) throws Exception{
 		//boolean check= false;
 		UserVO u=new UserVO();
+		Connection con = null;
+		PreparedStatement psmt=null;
+		ResultSet rs= null;
 		try{
-			Connection con = ConnectionUtility.getConnection();
-			String query= "select pwd,userId,username from users where email= ?";
+			con = ConnectionUtility.getConnection();
+			String query= "select username,pwd,userId,username from users where email= ?";
 			
-			PreparedStatement psmt= con.prepareStatement(query);
+			psmt= con.prepareStatement(query);
 			psmt.setString(1,email);
-			ResultSet rs= psmt.executeQuery();
+			rs= psmt.executeQuery();
 			if(rs.next()){
 			if(pwd.equals(rs.getString("pwd")))
 					{
@@ -83,20 +98,27 @@ public class RegisterUtility {
 		}
 catch(Exception e){
 	e.printStackTrace();
+		}finally{
+			rs.close();
+			psmt.close();
+			con.close();
 }
 		
 		
 		return  u;
 	}
-	public static UserVO getUser(long userId){
+	public static UserVO getUser(long userId) throws Exception{
 		UserVO u = new UserVO();
+		Connection con = null;
+		PreparedStatement psmt=null;
+		ResultSet rs= null;
 		try{
-			Connection con = ConnectionUtility.getConnection();
+			con = ConnectionUtility.getConnection();
 			String query= "select * from users where userid=?";
 			
-			PreparedStatement psmt= con.prepareStatement(query);
+			psmt= con.prepareStatement(query);
 			psmt.setLong(1,userId);
-			ResultSet rs= psmt.executeQuery();
+			rs= psmt.executeQuery();
 			if(rs!=null && rs.next()){
 				u.setName(rs.getString("username"));
 				u.setEmail(rs.getString("email"));
@@ -109,6 +131,10 @@ catch(Exception e){
 		}
 		catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			rs.close();
+			psmt.close();
+			con.close();
 		}
 		return u;
 	}

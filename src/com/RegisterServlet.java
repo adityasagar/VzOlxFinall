@@ -30,7 +30,9 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String flag=(String)request.getParameter("flag");
+		try{
 		if(flag.trim().equalsIgnoreCase("register")){
 		UserVO newUser= new UserVO();
 		newUser.setName(((String)request.getParameter("name")).trim());
@@ -39,6 +41,7 @@ public class RegisterServlet extends HttpServlet {
 		newUser.setContact((String)request.getParameter("number"));
 		newUser.setPwd((String)request.getParameter("pwd"));	
 		//newUser.setJoiningDate(new java.sql.Date(new java.util.Date()));
+		
 		boolean check=RegisterUtility.signUp(newUser);
 		System.out.println(newUser.getName());
 		if(check){
@@ -93,7 +96,11 @@ public class RegisterServlet extends HttpServlet {
 		String contact=request.getParameter("contact");
 		*/
 		
-		// TODO Auto-generated method stub
+	
+		}// TODO Auto-generated method stub
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

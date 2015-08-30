@@ -41,6 +41,7 @@ public class ProductServlet extends HttpServlet {
 		String name = request.getParameter("name")==null?"":(String)request.getParameter("name");
 		request.setAttribute("name",(String)(request.getParameter("name").trim()));
 		request.setAttribute("userid",(String)(request.getParameter("userid").trim()));
+		try{
 		UserVO fullUser= RegisterUtility.getUser(Long.valueOf(userId));
 		request.setAttribute("user", fullUser);
 		if(type.trim().equalsIgnoreCase("category")){
@@ -122,4 +123,9 @@ public class ProductServlet extends HttpServlet {
 			//request.getRequestDispatcher("addProd.jsp").include(request, response);
 		}
 }
+	
+	catch(Exception e){
+		e.printStackTrace();
+	}
+	}
 }

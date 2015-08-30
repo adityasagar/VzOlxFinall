@@ -21,7 +21,7 @@
   display: none;
 }
 #cssmenu {
-  width: 200px;
+  width: 150px;
   font-family: 'Open Sans', sans-serif;
   background: #ffffff;
   font-weight: bold;
@@ -61,7 +61,7 @@
 }
 
 #cssmenu > ul > li > a {
-  padding: 4px;
+  padding: 3px;
   font-size: 12px;
   text-decoration: none;
   text-transform: uppercase;

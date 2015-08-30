@@ -32,7 +32,7 @@ import javax.mail.internet.*;
           // multipart.addBodyPart(part2);
            message.setFrom(new InternetAddress("Verizon_Employee_Classifieds"));
            message.addRecipient(Message.RecipientType.TO,
-              new InternetAddress("gauravvicky008@gmail.com"));
+              new InternetAddress(seller.getEmail()));
            message.setSubject("Someone is Interested in Your Product");
            message.setContent(multipart);
            Transport transport = mailSession.getTransport();

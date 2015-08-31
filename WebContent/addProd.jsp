@@ -60,7 +60,7 @@ function home(){
 function addProd(){
 	document.getElementById("userid").value=userId;
 	document.getElementById("name").value=name;
-	var form = document.getElementById("form1");
+	var form = document.getElementById("form");
 	form.action = "ProductServlet";
 	form.submit();
 }
@@ -100,7 +100,7 @@ function addProd(){
 </table>
 <hr>
 </div>
-<form name='form1' id='form1' action="ProductServlet" method="post">
+<form name='form' id='form' action="ProductServlet" method="post">
 <input type="hidden" name="flag" value="login"/>
 <input type="hidden" name="type" id="type"/>
 <input type="hidden" name="value" id="value"/>

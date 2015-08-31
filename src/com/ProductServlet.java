@@ -41,6 +41,8 @@ public class ProductServlet extends HttpServlet {
 		String name = request.getParameter("name")==null?"":(String)request.getParameter("name");
 		request.setAttribute("name",(String)(request.getParameter("name").trim()));
 		request.setAttribute("userid",(String)(request.getParameter("userid").trim()));
+		System.out.println("det"+userId+" "+name+" "+type);
+
 		try{
 		UserVO fullUser= RegisterUtility.getUser(Long.valueOf(userId));
 		request.setAttribute("user", fullUser);

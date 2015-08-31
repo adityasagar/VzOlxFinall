@@ -239,7 +239,7 @@ catch(Exception e){
 		//value="%"+value+"%";
 		try{
 			con=ConnectionUtility.getConnection();
-			String query="Select * from products order by hits desc limit ? ";
+			String query="Select * from products order by hits limit ? ";
 			ps= con.prepareStatement(query);
 			ps.setInt(1,Integer.parseInt(value));
 			rs= ps.executeQuery();

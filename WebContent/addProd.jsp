@@ -51,13 +51,15 @@ function clearForm(){
 function home(){
 	document.getElementById("email").value='<%= user.getEmail()%>';
 	document.getElementById("pwd").value='<%= user.getPwd()%>';
+	document.getElementById("userid").value=userId;
+	document.getElementById("name").value=name;
 	var form = document.getElementById("form");
 	form.action="RegisterServlet";
 	form.submit();
 }
 function addProd(){
-	alert(document.getElementById("userid").value);
-	alert(document.getElementById("name").value);
+	document.getElementById("userid").value=userId;
+	document.getElementById("name").value=name;
 	var form = document.getElementById("form1");
 	form.action = "ProductServlet";
 	form.submit();

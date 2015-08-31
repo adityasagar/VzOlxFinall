@@ -39,7 +39,11 @@ td.det{
 	background-color:#DCDCDC;
 }
 
-
+.button{
+	background-color:#CC0000;
+	color:white;
+	width:100%;
+}
 	
 </style>
 <script>

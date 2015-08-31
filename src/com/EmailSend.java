@@ -37,13 +37,13 @@ import javax.mail.internet.*;
            message.setSubject("Someone is Interested in Your Product");
            message.setContent(multipart);
            Transport transport = mailSession.getTransport();
-        // Connect the transport object.
-        transport.connect();
-        // Send the message.
-        transport.sendMessage(message, message.getAllRecipients());
-        // Close the connection.
-        transport.close();
-        System.out.println("my part is done");
+	        // Connect the transport object.
+	        transport.connect();
+	        // Send the message.
+	        transport.sendMessage(message, message.getAllRecipients());
+	        // Close the connection.
+	        transport.close();
+	        System.out.println("my part is done");
            
         }
         private class SMTPAuthenticator extends javax.mail.Authenticator {

@@ -25,7 +25,6 @@
 	<property name="project.lib.dir" value="${project.web.dir}/WEB-INF/lib" />
 	<property name="project.war" value="${project.name}.war" />
 	<property name="src.test" value="src/test" />
-	<property name="reports.tests" value="build/test" />
 
 
 
@@ -46,35 +45,12 @@
 	</target>
 	<target name="clean">
 		<delete dir="${project.classes.dir}" />
-		<delete dir="${reports.tests}" />
 		<delete dir="dist/${project.war}" />
 		<delete dir="dist">
 		</delete>
 		<mkdir dir="dist" />
 	</target>
-	<target name="junit" depends="build" >
-
-	    <mkdir dir="${reports.tests}"/>
-
-	    <junit printsummary="yes" haltonfailure="yes">
-	      <classpath>
-	        <pathelement location="${project.classes.dir}"/>
-	        <pathelement location="${src.test}"/>
-	      	<classpath refid="project.classpath" />
-	      </classpath>
-
-	      <formatter type="plain"/>
-	      <formatter type="xml"/>
-
-	      <batchtest fork="yes" todir="${reports.tests}">
-	        <fileset dir="${src.test}">
-	          <include name="**/*Test*.java"/>
-	        </fileset>
-	      </batchtest>
-
-	    </junit>
-
-	</target>
+	
 	<target depends="init" name="build" description="Compiling all java files in ${project.src.dir}">
 		<echo message="${project.name}: ${ant.file}" />
 		<javac debug="true" fork="true" debuglevel="${debuglevel}" destdir="${project.classes.dir}" includeantruntime="false" source="${source}" target="${target}">
@@ -83,7 +59,7 @@
 		</javac>
 
 	</target>
-	<target depends="junit" name="package" description="Packagign all files into ${project.war}">
+	<target depends="build" name="package" description="Packagign all files into ${project.war}">
 		<war destfile="dist/${project.war}" index="true" basedir="dist">
 			<classes dir="${project.classes.dir}" />
 			<lib dir="${project.lib.dir}" />

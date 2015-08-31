@@ -33,7 +33,7 @@ public class ProductServlet extends HttpServlet {
 		
 		// TODO Auto-generated method stub
 		String flag = request.getParameter("flag")==null?"":(String)request.getParameter("flag");
-		System.out.println("inside Prduct Servlet"+flag);
+		System.out.println("inside Prduct Servlet"+flag+"");
 
 		String type=request.getParameter("type")==null?"":(String)request.getParameter("type");
 		String value = request.getParameter("value")==null?"":(String)request.getParameter("value");

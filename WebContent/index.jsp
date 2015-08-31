@@ -209,11 +209,11 @@ function home(){
 <table>
 <tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td><a href="javascript:prodDetails('detail',<%=recent.get(i).getProductId()%>);"><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></a></td>
+<td><a href="javascript:prodDetails('detail',<%=mostView.get(i).getProductId()%>);"><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></a></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td align="center"><a href="javascript:prodDetails('detail',<%=recent.get(i).getProductId()%>);"><%=mostView.get(i).getName() %></a></td>
+<td align="center"><a href="javascript:prodDetails('detail',<%=mostView.get(i).getProductId()%>);"><%=mostView.get(i).getName() %></a></td>
 <%} %>
 </tr>
 </table>

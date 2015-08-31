@@ -95,7 +95,7 @@ catch(Exception e){
 		try{
 			java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			con = ConnectionUtility.getConnection();
-			String query= "insert into products(productname, category,hits, price,ownerid,description, reason, buydate, imagelink ) values(?,?,?,?,?,?,?,?,?)";
+			String query= "insert into products(productname, category,hits, price,ownerid,description, reason, buydate, imagelink ) values(?,?,?,?,?,?,?,sysdate,?)";
 			psmt= con.prepareStatement(query);
 			psmt.setString(1,p.getName() );
 			psmt.setString(2, p.getCategory());
@@ -105,7 +105,7 @@ catch(Exception e){
 			//psmt.setLong(6,p.getSoldTo() );
 			psmt.setString(6,p.getDescription() );
 			psmt.setString(7,p.getReason() );
-			psmt.setDate(8,sqlDate );
+			//psmt.setDate(8,sqlDate );
 			psmt.setString(9,getCategoryImage(p.getCategory()) );
 
 			//psmt.setDate(10,p.getSellDate() );

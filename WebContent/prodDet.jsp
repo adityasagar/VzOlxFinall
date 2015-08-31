@@ -38,6 +38,13 @@ UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getA
 td.det{
 	background-color:#DCDCDC;
 }
+
+.button{
+	background-color:#CC0000;
+	color:white;
+	width:100%;
+}
+	
 </style>
 <script>
 var userId = '<%=userId%>';

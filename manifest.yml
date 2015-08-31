@@ -1,5 +1,5 @@
 applications :
-- name : vzOlxFinal
+- name : VzClassified
 memory: 512M
 instance: 1
 path: dist/MyProj.war

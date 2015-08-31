@@ -56,6 +56,8 @@ function home(){
 	form.submit();
 }
 function addProd(){
+	document.getElementById("userid").value=userId;
+	document.getElementById("name").value=name;
 	alert(document.getElementById("userid").value);
 	alert(document.getElementById("name").value);
 	var form = document.getElementById("form1");

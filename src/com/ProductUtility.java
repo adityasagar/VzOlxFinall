@@ -239,12 +239,13 @@ catch(Exception e){
 		//value="%"+value+"%";
 		try{
 			con=ConnectionUtility.getConnection();
-			String query="Select * from products order by hits limit ? ";
+			String query="Select * from products order by productid desc limit ? ";
 			ps= con.prepareStatement(query);
 			ps.setInt(1,Integer.parseInt(value));
 			rs= ps.executeQuery();
 			while(rs!=null && rs.next()){
 				ProductVO p = new ProductVO();
+				p.setProductId(rs.getLong("productid"));
 				p.setName(rs.getString("productname"));
 				p.setCategory(rs.getString("category"));
 				p.setHits(rs.getLong("hits"));
@@ -278,7 +279,7 @@ catch(Exception e){
 		//value="%"+value+"%";
 		try{
 			con=ConnectionUtility.getConnection();
-			String query="Select * from products order by buyDate desc limit ? ";
+			String query="Select * from products order by productid desc limit ? ";
 			ps= con.prepareStatement(query);
 			ps.setInt(1,Integer.parseInt(value));
 			rs= ps.executeQuery();

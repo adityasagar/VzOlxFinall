@@ -30,6 +30,7 @@ import javax.mail.internet.*;
               "text/html");
            multipart.addBodyPart(part1);
           // multipart.addBodyPart(part2);
+           System.out.println("TO: "+seller.getEmail());
            message.setFrom(new InternetAddress("Verizon_Employee_Classifieds"));
            message.addRecipient(Message.RecipientType.TO,
               new InternetAddress(seller.getEmail()));

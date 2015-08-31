@@ -60,7 +60,7 @@
 	      <classpath>
 	        <pathelement location="${project.classes.dir}"/>
 	        <pathelement location="${src.test}"/>
-	      	<pathelement path="${project.classpath}"/>
+	      	<classpath refid="project.classpath" />
 	      </classpath>
 
 	      <formatter type="plain"/>

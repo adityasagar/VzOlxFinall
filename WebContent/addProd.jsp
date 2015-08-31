@@ -51,6 +51,7 @@ function home(){
 	document.getElementById("pwd").value='<%= user.getPwd()%>';
 	document.getElementById("userid").value=userId;
 	document.getElementById("name").value=name;
+	document.getElementById("type").value="login";
 	var form = document.getElementById("form");
 	form.action="RegisterServlet";
 	form.submit();
@@ -58,6 +59,7 @@ function home(){
 function addProd(){
 	document.getElementById("userid").value=userId;
 	document.getElementById("name").value=name;
+	document.getElementById("type").value="newProd";
 	var form = document.getElementById("form");
 	form.action = "ProductServlet";
 	form.submit();
@@ -100,7 +102,7 @@ function addProd(){
 </div>
 <form name='form' id='form' action="ProductServlet" method="post">
 <input type="hidden" name="flag" value="login"/>
-<input type="hidden" name="type" id="type"/>
+<input type="hidden" name="type" value="newProd"/>
 <input type="hidden" name="value" id="value"/>
 <input type="hidden" name="userid" id="userid"/>
 <input type="hidden" name="name" id="name"/>
@@ -108,10 +110,6 @@ function addProd(){
 <input type="hidden" name="pwd" id="pwd"/>
 <span><h2 class="title">Just a brief Details for others to know about your Product...</h2></span>
 <div class="login" id="login">
-
-<input type="hidden" name="type" value="newProd"/>
-<input type="hidden" name="userid" id="userid"/>
-<input type="hidden" name="name" id="name"/>
 <table align="left" width="100%">
 <tr>
 <td align="center">

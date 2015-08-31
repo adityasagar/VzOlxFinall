@@ -95,6 +95,7 @@ public class ProductServlet extends HttpServlet {
 			
 		}
 		if(type.trim().equalsIgnoreCase("newProd")){
+			System.out.println("Adding new Product");
 			ProductVO newProduct = new ProductVO();
 			newProduct.setName(request.getParameter("title")==null?"":(String)request.getParameter("title"));
 			newProduct.setPrice(request.getParameter("price")==null?0:Float.valueOf(request.getParameter("price")));

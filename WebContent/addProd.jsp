@@ -51,7 +51,7 @@ function home(){
 	document.getElementById("pwd").value='<%= user.getPwd()%>';
 	document.getElementById("userid").value=userId;
 	document.getElementById("name").value=name;
-	document.getElementById("type").value="login";
+	document.getElementById("flag").value="login";
 	var form = document.getElementById("form");
 	form.action="RegisterServlet";
 	form.submit();
@@ -101,8 +101,8 @@ function addProd(){
 <hr>
 </div>
 <form name='form' id='form' action="ProductServlet" method="post">
-<input type="hidden" name="flag" value="login"/>
-<input type="hidden" name="type" value="newProd"/>
+<input type="hidden" name="flag" id="flag" value="login"/>
+<input type="hidden" name="type" id="type" value="newProd"/>
 <input type="hidden" name="value" id="value"/>
 <input type="hidden" name="userid" id="userid"/>
 <input type="hidden" name="name" id="name"/>

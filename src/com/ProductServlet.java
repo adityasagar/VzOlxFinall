@@ -59,6 +59,15 @@ public class ProductServlet extends HttpServlet {
 			request.getRequestDispatcher("prodDet.jsp").include(request, response);
 			
 		}
+		if(type.trim().equalsIgnoreCase("detail")){
+			List<ProductVO> results = new ArrayList<ProductVO>();
+			ProductVO result= ProductUtility.getProduct( Long.valueOf(value));
+			results.add(result);
+			request.setAttribute("type", type);
+			request.setAttribute("value", value);
+			request.setAttribute("results",results);
+			request.getRequestDispatcher("prodDet.jsp").include(request, response);
+		}
 		if(type.trim().equalsIgnoreCase("mostviewed")){
 			ArrayList<ProductVO> results= ProductUtility.getMostViewedResults( value);
 			request.setAttribute("type", type);

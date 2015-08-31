@@ -42,6 +42,8 @@ td.det{
 <script>
 var userId = '<%=userId%>';
 var name = '<%=name%>';
+alert("userId"+userId+", name"+name);
+
 document.getElementById("userid").value=userId;
 document.getElementById("name").value=name;
 /*$(document).ready(function(){

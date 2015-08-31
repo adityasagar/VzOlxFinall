@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.UserVO" %>
     
-<% String userId= request.getAttribute("userid")==null?"":(String)request.getAttribute("userid");
+<% String userId= request.getAttribute("userid")==null?"0":(String)request.getAttribute("userid");
 String name= request.getAttribute("name")==null?"":(String)request.getAttribute("name");
 Boolean inserted= request.getAttribute("inserted")==null?false:(Boolean)request.getAttribute("inserted");
 UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getAttribute("user");
@@ -34,6 +34,7 @@ UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getA
 <script>
 var userId = '<%=userId %>';
 var name = '<%=name %>';
+alert("userId"+userId+", name"+name);
 document.getElementById("userid").value=userId;
 document.getElementById("name").value=name;
 

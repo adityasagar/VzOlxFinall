@@ -48,7 +48,7 @@ String message = request.getAttribute("message")==null?"":String.valueOf(request
 <% }%>
 var userId = '<%=userId %>';
 var name = '<%=name %>';
-//alert("userId"+userId+", name"+name);
+alert("userId"+userId+", name"+name);
 $(document).ready(function(){
 	if(userId!="0" && name!=""){
 		document.getElementById("det").style.display="block";
@@ -191,11 +191,11 @@ function home(){
 <table>
 <tr>
 <% for(int i=0;i<recent.size();i++){ %>
-<td><a></a><img src='<%=recent.get(i).getImageLink() %>' width="300" height="150" /></a></td>
+<td><a href="javascript:prodDetails('detail',<%= recent.get(i).getProductId()%>);"><img src='<%=recent.get(i).getImageLink() %>' width="300" height="150" /></a></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<recent.size();i++){ %>
-<td align="center"><a><%=recent.get(i).getName() %></a></td>
+<td align="center"><a href="javascript:prodDetails('detail',<%=recent.get(i).getProductId()%>);"><%=recent.get(i).getName() %></a></td>
 <%} %>
 </tr>
 </table>
@@ -207,11 +207,11 @@ function home(){
 <table>
 <tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td><a></a><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></a></td>
+<td><a href="javascript:prodDetails('detail',<%=recent.get(i).getProductId()%>);"><img src='<%=mostView.get(i).getImageLink() %>' width="300" height="150" /></a></td>
 <%} %>
 </tr><tr>
 <% for(int i=0;i<mostView.size();i++){ %>
-<td align="center"><a><%=mostView.get(i).getName() %></a></td>
+<td align="center"><a href="javascript:prodDetails('detail',<%=recent.get(i).getProductId()%>);"><%=mostView.get(i).getName() %></a></td>
 <%} %>
 </tr>
 </table>

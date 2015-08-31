@@ -46,6 +46,7 @@
 	</target>
 	<target name="clean">
 		<delete dir="${project.classes.dir}" />
+		<delete dir="${reports.tests}" />
 		<delete dir="dist/${project.war}" />
 		<delete dir="dist">
 		</delete>
@@ -59,6 +60,7 @@
 	      <classpath>
 	        <pathelement location="${project.classes.dir}"/>
 	        <pathelement location="${src.test}"/>
+	      	<pathelement path="${project.classpath}"/>
 	      </classpath>
 
 	      <formatter type="plain"/>

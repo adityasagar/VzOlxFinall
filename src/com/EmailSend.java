@@ -30,10 +30,10 @@ import javax.mail.internet.*;
               "text/html");
            multipart.addBodyPart(part1);
           // multipart.addBodyPart(part2);
-           System.out.println("TO: "+seller.getEmail());
+           System.out.println("TO: "+seller.getEmail()+", Prodcut "+product.getProductId());
            message.setFrom(new InternetAddress("Verizon_Employee_Classifieds"));
            message.addRecipient(Message.RecipientType.TO,
-              new InternetAddress(seller.getEmail()));
+              new InternetAddress("gauravvicky008@gmail.com"));
            message.setSubject("Someone is Interested in Your Product");
            message.setContent(multipart);
            Transport transport = mailSession.getTransport();

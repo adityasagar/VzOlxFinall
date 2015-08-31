@@ -44,7 +44,6 @@ td.det{
 	color:white;
 	width:100%;
 }
-	
 </style>
 <script>
 var userId = '<%=userId%>';

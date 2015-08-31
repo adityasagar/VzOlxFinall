@@ -55,6 +55,13 @@ function home(){
 	form.action="RegisterServlet";
 	form.submit();
 }
+function addProd(){
+	alert(document.getElementById("userid").value);
+	alert(document.getElementById("name").value);
+	var form = document.getElementById("form1");
+	form.action = "ProductServlet";
+	form.submit();
+}
 </script>
 </head>
 <body>
@@ -142,7 +149,7 @@ function home(){
 <textarea name= "desc" placeholder="Description"></textarea></td>
 </tr>
 
-<tr><td align="center"><input type="submit" value="Submit">&nbsp;&nbsp;
+<tr><td align="center"><input type="button" value="Submit" onClick="javascript:addProd();">&nbsp;&nbsp;
 <input type="button" value="Clear" onClick='javascript:clearForm();'></td></tr>
 </table>
 </form>

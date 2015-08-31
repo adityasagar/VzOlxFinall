@@ -146,8 +146,8 @@ function addProd(){
 <textarea name= "desc" placeholder="Description"></textarea></td>
 </tr>
 
-<tr><td align="center"><input type="button" value="Submit" onClick="javascript:addProd();">&nbsp;&nbsp;
-<input type="button" value="Clear" onClick='javascript:clearForm();'></td></tr>
+<tr><td align="center"><input class="button" type="button" value="Submit" onClick="javascript:addProd();">&nbsp;&nbsp;
+<input class="button" type="button" value="Clear" onClick='javascript:clearForm();'></td></tr>
 </table>
 
 </div>

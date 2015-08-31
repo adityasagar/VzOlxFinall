@@ -25,3 +25,8 @@ span.uName{
 	font-family: Georgia, serif;
 	font-weight: bold;
 }
+.button{
+	background-color:#CC0000;
+	color:white;
+	width:100%;
+}

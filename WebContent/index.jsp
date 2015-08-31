@@ -39,7 +39,10 @@ String message = request.getAttribute("message")==null?"":String.valueOf(request
 #det{
 	display:none;
 }
-
+.button{
+	background-color:#CC0000;
+	color:white;
+}
 </style>
 <script>
 <% if(message!=null && message.trim().length()>0){ %>
@@ -48,7 +51,6 @@ String message = request.getAttribute("message")==null?"":String.valueOf(request
 <% }%>
 var userId = '<%=userId %>';
 var name = '<%=name %>';
-alert("userId"+userId+", name"+name);
 $(document).ready(function(){
 	if(userId!="0" && name!=""){
 		document.getElementById("det").style.display="block";
@@ -118,8 +120,8 @@ function home(){
 <input type="text" id="email" name="email" placeholder="Enter your Email ID"></td></tr>
 <tr><td align="center"><input type="password" id="pwd" name="pwd" placeholder="Enter your Password"></td></tr>
 
-<tr><td align="right"><input type="submit" value="Login">
-<input type="button" value="Clear" onClick="javascript:clearForm();"></td></tr>
+<tr><td align="right"><input class="button" type="submit" value="Login">
+<input type="button" value="Clear"  class="button" onClick="javascript:clearForm();"></td></tr>
 <tr><td align="right"><label>Not a User Yet? <a href="javascript:signUp();">Sign Up Here</a></label></td></tr>
 </table>
 </form>

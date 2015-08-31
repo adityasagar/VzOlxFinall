@@ -34,7 +34,6 @@ UserVO user=request.getAttribute("user")==null?new UserVO():(UserVO)request.getA
 <script>
 var userId = '<%=userId %>';
 var name = '<%=name %>';
-alert("userId"+userId+", name"+name);
 
 $(document).ready(function(){
 	$("#userid").val(userId);

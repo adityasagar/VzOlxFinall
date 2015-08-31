@@ -46,7 +46,7 @@ $(document).ready(function(){
 	<%}%>
 });
 function clearForm(){
-	$('#form1').trigger('reset');
+	$('form').trigger('reset');
 }
 function home(){
 	document.getElementById("email").value='<%= user.getEmail()%>';
@@ -56,8 +56,6 @@ function home(){
 	form.submit();
 }
 function addProd(){
-	document.getElementById("userid").value=userId;
-	document.getElementById("name").value=name;
 	alert(document.getElementById("userid").value);
 	alert(document.getElementById("name").value);
 	var form = document.getElementById("form1");
@@ -100,7 +98,7 @@ function addProd(){
 </table>
 <hr>
 </div>
-<form id="form" action="RegisterServlet" method="post">
+<form name='form1' id='form1' action="ProductServlet" method="post">
 <input type="hidden" name="flag" value="login"/>
 <input type="hidden" name="type" id="type"/>
 <input type="hidden" name="value" id="value"/>
@@ -108,10 +106,9 @@ function addProd(){
 <input type="hidden" name="name" id="name"/>
 <input type="hidden" name="email" id="email"/>
 <input type="hidden" name="pwd" id="pwd"/>
-</form>
 <span><h2 class="title">Just a brief Details for others to know about your Product...</h2></span>
 <div class="login" id="login">
-<form name='form1' id='form1' action="ProductServlet" method="post">
+
 <input type="hidden" name="type" value="newProd"/>
 <input type="hidden" name="userid" id="userid"/>
 <input type="hidden" name="name" id="name"/>
@@ -154,8 +151,9 @@ function addProd(){
 <tr><td align="center"><input type="button" value="Submit" onClick="javascript:addProd();">&nbsp;&nbsp;
 <input type="button" value="Clear" onClick='javascript:clearForm();'></td></tr>
 </table>
-</form>
+
 </div>
+</form>
 </body>
 </html>
  
